@@ -1,0 +1,3 @@
+[submodule "docs/cppreference"]
+	path = docs/cppreference
+	url = https://github.com/doleckijakub/cppreference
