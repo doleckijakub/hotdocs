@@ -42,7 +42,6 @@ int main(int argc, char const *argv[]) {
 			if(argc) {
 				std::string directory = next_arg();
 				if(argc) {
-					// fs::path directory = directory;
 					std::string indexLocation = next_arg();
 					Indexer::indexDirectory(directory);
 				} else {
