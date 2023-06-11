@@ -1,5 +1,5 @@
 CPP := clang++
-CPPFLAGS := -Wall -Wextra -pedantic -std=c++17
+CPPFLAGS := -O3 -Wall -Wextra -pedantic -std=c++17
 LDFLAGS :=
 
 EXEC := hotdocs
