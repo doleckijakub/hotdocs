@@ -5,9 +5,14 @@
 namespace hotdocs {
 
 class WordLexer {
+	const std::string &content;
+	size_t cur, len;
+
 public:
 
-	std::string lex(const std::string &content);
+	WordLexer(const std::string &content);
+
+	std::string nextToken();
 
 };
 

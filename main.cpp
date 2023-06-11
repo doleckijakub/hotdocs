@@ -1,6 +1,7 @@
 #include "indexer.hpp"
 
 #include <cassert>
+#include <fstream>
 
 int main(int argc, char const *argv[]) {
 	auto next_arg = [&]() -> const char *
@@ -20,8 +21,17 @@ int main(int argc, char const *argv[]) {
 			if(argc) {
 				std::string directory = next_arg();
 				if(argc) {
-					std::string indexLocation = next_arg();
-					hotdocs::Indexer::indexDirectory(directory);
+					std::string indexLocation = (std::filesystem::path(next_arg()) / "index.json").generic_string();
+
+					std::ofstream output(indexLocation);
+
+					if(!output) {
+						hotdocs::error("could not write to '", indexLocation, "'");
+						return 1;
+					}
+
+					hotdocs::Indexer::indexDirectory(directory, output);
+					return 0;
 				} else {
 					hotdocs::error("no index location provided");
 					return 1;
