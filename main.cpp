@@ -3,6 +3,10 @@
 #include <cassert>
 #include <fstream>
 
+void usage(const std::string &programName) {
+	std::cerr << "Usage: " << programName << " index <directory to index> <path to store index.json>" << std::endl;
+}
+
 int main(int argc, char const *argv[]) {
 	auto next_arg = [&]() -> const char *
 	{
@@ -13,7 +17,7 @@ int main(int argc, char const *argv[]) {
 		return arg;
 	};
 
-	std::string program_name = next_arg();
+	std::string programName = next_arg();
 
 	if(argc) {
 		std::string subcommand = next_arg();
@@ -34,20 +38,22 @@ int main(int argc, char const *argv[]) {
 					return 0;
 				} else {
 					hotdocs::error("no index location provided");
+					usage(programName);
 					return 1;
 				}
 			} else {
 				hotdocs::error("no directory provided");
+				usage(programName);
 				return 1;
 			}
-		} else if(subcommand == "query") {
-			// TODO
 		} else {
 			hotdocs::error("unknown subcommand '", subcommand, "'");
+			usage(programName);
 			return 1;
 		}
 	} else {
 		hotdocs::error("no subcommand provided");
+		usage(programName);
 		return 1;
 	}
 
